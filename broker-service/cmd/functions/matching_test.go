@@ -89,5 +89,29 @@ func TestQuerySinglePeople(t *testing.T) {
 }
 
 func TestMatchAndDate(t *testing.T) {
+	people := []Person{
+		{
+			Name:              "John",
+			Height:            180,
+			Gender:            Gender{IsMale: true},
+			WantedDatesNumber: 1,
+			matcher:           []string{"Jane", "Bob"}, // add person name to matcher list
+		},
+		{
+			Name:              "Jane",
+			Height:            160,
+			Gender:            Gender{IsMale: false},
+			WantedDatesNumber: 1,
+			matcher:           []string{"Tina", "Alice", "John"}, // add person name to matcher list
+		},
+	}
+	newPeople := matchAndDate(people, "John", "Bob")
+	newPeople2 := matchAndDate(people, "Bob", "Jane")
+	assert.Equal(t, newPeople, people)  // do not change the original people list
+	assert.Equal(t, newPeople2, people) // do not change the original people list
 
+	newPeople3 := matchAndDate(people, "John", "Jane")
+	//fmt.Println(newPeople3)
+	assert.Equal(t, newPeople3[0].matcher, []string{"Bob"})
+	assert.Equal(t, newPeople3[1].matcher, []string{"Tina", "Alice"})
 }

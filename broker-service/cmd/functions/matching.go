@@ -72,41 +72,38 @@ func QuerySinglePeople(people []Person, name string) []string {
 
 //matching algorithm
 func matchAndDate(people []Person, male string, female string) []Person {
-	malePerson := Person{}
-	femalePerson := Person{}
 	indexMale := -1
 	indexFemale := -1
 	// find 2 people from the list
 	for k, v := range people {
 		if v.Name == male {
-			malePerson = v
 			indexMale = k
 		}
 		if v.Name == female {
-			femalePerson = v
 			indexFemale = k
 		}
 	}
 	//corner case no matcher
-	if malePerson.Name != "" || femalePerson.Name != "" {
+	if indexMale == -1 || indexFemale == -1 {
+		fmt.Println("do not find the matcing people")
 		return people
 	}
 	//matching search
-	for _, v := range malePerson.matcher {
-		for _, matchName := range femalePerson.matcher {
-			if v == matchName {
-				if malePerson.WantedDatesNumber <= 0 {
-					fmt.Printf("Sorry, %s is not interested in you!\n", femalePerson.Name)
+	for _, v := range people[indexMale].matcher {
+		for _, matchName := range people[indexFemale].matcher {
+			if v == people[indexFemale].Name && matchName == people[indexMale].Name {
+				if people[indexMale].WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", people[indexFemale].Name)
 					RemoveSinglePerson(people, male)
 					return people
 				}
-				if femalePerson.WantedDatesNumber <= 0 {
-					fmt.Printf("Sorry, %s is not interested in you!\n", malePerson.Name)
+				if people[indexFemale].WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", people[indexMale].Name)
 					RemoveSinglePerson(people, female)
 					return people
 				}
 				// find the matcher, match and date
-				fmt.Printf(" %s %s match and date!\n\n", malePerson.Name, femalePerson.Name)
+				fmt.Printf(" %s %s match and date!\n\n", people[indexMale].Name, people[indexFemale].Name)
 				//Number of dates -1
 				people[indexMale].WantedDatesNumber--
 				people[indexFemale].WantedDatesNumber--
@@ -130,6 +127,6 @@ func matchAndDate(people []Person, male string, female string) []Person {
 		}
 	}
 	// if did not find the matcher in 2 person, print and return list
-	fmt.Printf(" %s %s male and female dosen't match!\n\n", malePerson.Name, femalePerson.Name)
+	fmt.Printf(" %s %s male and female dosen't match!\n\n", people[indexMale].Name, people[indexFemale].Name)
 	return people
 }
