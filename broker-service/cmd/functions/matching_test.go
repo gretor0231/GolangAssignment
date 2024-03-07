@@ -42,5 +42,36 @@ func TestAddSinglePersonAndMatch(t *testing.T) {
 	assert.Equal(t, len(newPeople), 3)
 	assert.Equal(t, newPeople[1].matcher, []string{"Bob"})
 	assert.Equal(t, newPeople2[0].matcher, []string{"Alice"})
+}
+
+func TestRemoveSinglePerson(t *testing.T) {
+	people := []Person{
+		{
+			Name:              "John",
+			Height:            180,
+			Gender:            Gender{IsMale: true},
+			WantedDatesNumber: 3,
+			matcher:           []string{},
+		},
+		{
+			Name:              "Jane",
+			Height:            160,
+			Gender:            Gender{IsMale: false},
+			WantedDatesNumber: 2,
+			matcher:           []string{"Bob"}, // add person name to matcher list
+		},
+		{
+			Name:              "Bob",
+			Height:            170,
+			Gender:            Gender{IsMale: true},
+			WantedDatesNumber: 1,
+			matcher:           []string{},
+		},
+	}
+	newPeople := RemoveSinglePerson(people, "Bob")
+	newPeople2 := RemoveSinglePerson(newPeople, "Alice")
+	assert.Equal(t, len(newPeople), 2)
+	assert.Equal(t, len(newPeople[1].matcher), 0)
+	assert.Equal(t, len(newPeople2), 2)
 
 }

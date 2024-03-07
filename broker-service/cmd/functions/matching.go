@@ -49,10 +49,10 @@ func RemoveSinglePerson(people []Person, name string) []Person {
 			people = append(people[:i], people[i+1:]...)
 		}
 	}
-	for _, v := range people {
+	for x, v := range people {
 		for i, matchName := range v.matcher {
 			if matchName == name {
-				v.matcher = append(v.matcher[:i], v.matcher[i+1:]...)
+				people[x].matcher = append(v.matcher[:i], v.matcher[i+1:]...)
 			}
 		}
 	}
