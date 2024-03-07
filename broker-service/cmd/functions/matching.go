@@ -17,8 +17,15 @@ type Gender struct {
 func AddSinglePersonAndMatch(people []Person, person Person) []Person {
 	people = append(people, person)
 	for _, v := range people {
+
 		if v.Gender.IsMale == true && person.Gender.IsMale == false && v.Height > person.Height {
 			v.matcher = append(v.matcher, person.Name) // add person name to matcher list
+			fmt.Printf("%s add person name to matcher list\n", person.Name)
+		}
+
+		if v.Gender.IsMale == false && person.Gender.IsMale == true && v.Height < person.Height {
+			v.matcher = append(v.matcher, person.Name) // add person name to matcher list
+			fmt.Printf("%s add person name to matcher list\n", person.Name)
 		}
 	}
 	return people
