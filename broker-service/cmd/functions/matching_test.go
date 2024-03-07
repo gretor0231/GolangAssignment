@@ -87,3 +87,7 @@ func TestQuerySinglePeople(t *testing.T) {
 	query := QuerySinglePeople(people, "Jane")
 	assert.Equal(t, query, []string{"Bob"})
 }
+
+func TestMatchAndDate(t *testing.T) {
+
+}

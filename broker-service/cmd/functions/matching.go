@@ -1,6 +1,8 @@
 package functions
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Person struct {
 	Name              string   `json:"name"`
@@ -69,30 +71,65 @@ func QuerySinglePeople(people []Person, name string) []string {
 }
 
 //matching algorithm
-func matchAndDate(people []Person, male Person, female Person) []Person {
+func matchAndDate(people []Person, male string, female string) []Person {
+	malePerson := Person{}
+	femalePerson := Person{}
+	indexMale := -1
+	indexFemale := -1
+	// find 2 people from the list
+	for k, v := range people {
+		if v.Name == male {
+			malePerson = v
+			indexMale = k
+		}
+		if v.Name == female {
+			femalePerson = v
+			indexFemale = k
+		}
+	}
 	//corner case no matcher
-	if len(male.matcher) == 0 || len(female.matcher) == 0 {
+	if malePerson.Name != "" || femalePerson.Name != "" {
 		return people
 	}
 	//matching search
-	for _, v := range male.matcher {
-		for _, matchName := range female.matcher {
+	for _, v := range malePerson.matcher {
+		for _, matchName := range femalePerson.matcher {
 			if v == matchName {
-				if male.WantedDatesNumber <= 0 {
-					fmt.Printf("Sorry, %s is not interested in you!\n", female.Name)
-					RemoveSinglePerson(people, male.Name)
+				if malePerson.WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", femalePerson.Name)
+					RemoveSinglePerson(people, male)
 					return people
 				}
-				if female.WantedDatesNumber <= 0 {
-					fmt.Printf("Sorry, %s is not interested in you!\n", male.Name)
-					RemoveSinglePerson(people, female.Name)
+				if femalePerson.WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", malePerson.Name)
+					RemoveSinglePerson(people, female)
 					return people
 				}
-				fmt.Printf(" %s %s match and date!\n\n", male.Name, female.Name)
-				male.WantedDatesNumber--
-				female.WantedDatesNumber--
+				// find the matcher, match and date
+				fmt.Printf(" %s %s match and date!\n\n", malePerson.Name, femalePerson.Name)
+				//Number of dates -1
+				people[indexMale].WantedDatesNumber--
+				people[indexFemale].WantedDatesNumber--
+				//both use up one date, so remove both from matching list
+				for i, v := range people[indexMale].matcher {
+					if v == female {
+						people[indexMale].matcher = append(
+							people[indexMale].matcher[:i], people[indexMale].matcher[i+1:]...,
+						)
+					}
+				}
+				for i, v := range people[indexFemale].matcher {
+					if v == male {
+						people[indexFemale].matcher = append(
+							people[indexFemale].matcher[:i], people[indexFemale].matcher[i+1:]...,
+						)
+					}
+				}
+				return people
 			}
 		}
 	}
+	// if did not find the matcher in 2 person, print and return list
+	fmt.Printf(" %s %s male and female dosen't match!\n\n", malePerson.Name, femalePerson.Name)
 	return people
 }
