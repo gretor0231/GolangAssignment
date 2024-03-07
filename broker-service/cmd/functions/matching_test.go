@@ -36,7 +36,6 @@ func TestAddSinglePersonAndMatch(t *testing.T) {
 		WantedDatesNumber: 1,
 		matcher:           []string{},
 	}
-
 	newPeople := AddSinglePersonAndMatch(people, person)
 	newPeople2 := AddSinglePersonAndMatch(people, person2)
 	assert.Equal(t, len(newPeople), 3)
@@ -73,5 +72,18 @@ func TestRemoveSinglePerson(t *testing.T) {
 	assert.Equal(t, len(newPeople), 2)
 	assert.Equal(t, len(newPeople[1].matcher), 0)
 	assert.Equal(t, len(newPeople2), 2)
+}
 
+func TestQuerySinglePeople(t *testing.T) {
+	people := []Person{
+		{
+			Name:              "Jane",
+			Height:            160,
+			Gender:            Gender{IsMale: false},
+			WantedDatesNumber: 2,
+			matcher:           []string{"Bob"}, // add person name to matcher list
+		},
+	}
+	query := QuerySinglePeople(people, "Jane")
+	assert.Equal(t, query, []string{"Bob"})
 }
