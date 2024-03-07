@@ -1,5 +1,7 @@
 package functions
 
+import "fmt"
+
 type Person struct {
 	Name              string   `json:"name"`
 	Height            int      `json:"height"`
@@ -49,6 +51,40 @@ func RemoveSinglePerson(people []Person, name string) []Person {
 	return people
 }
 
-func QuerySinglePeople() {
+func QuerySinglePeople(people []Person, name string) []string {
+	for _, v := range people {
+		if v.Name == name {
+			return v.matcher
+		}
+	}
+	return []string{}
+}
 
+//matching algorithm
+func matchAndDate(people []Person, male Person, female Person) []Person {
+	//corner case no matcher
+	if len(male.matcher) == 0 || len(female.matcher) == 0 {
+		return people
+	}
+	//matching search
+	for _, v := range male.matcher {
+		for _, matchName := range female.matcher {
+			if v == matchName {
+				if male.WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", female.Name)
+					RemoveSinglePerson(people, male.Name)
+					return people
+				}
+				if female.WantedDatesNumber <= 0 {
+					fmt.Printf("Sorry, %s is not interested in you!\n", male.Name)
+					RemoveSinglePerson(people, female.Name)
+					return people
+				}
+				fmt.Printf(" %s %s match and date!\n\n", male.Name, female.Name)
+				male.WantedDatesNumber--
+				female.WantedDatesNumber--
+			}
+		}
+	}
+	return people
 }
