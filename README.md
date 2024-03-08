@@ -11,3 +11,6 @@ cannot be matched anymore.
 
 3. QuerySinglePeople : Find the most N possible matched single people, where N is a
 request parameter.
+
+Structured project layout:
+   ![](/home/ericho/Pictures/Screenshots/Screenshot from 2024-03-08 09-36-05.png)
