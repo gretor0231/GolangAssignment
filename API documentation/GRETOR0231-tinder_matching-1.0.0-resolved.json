@@ -1,0 +1,134 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tinder-api",
+    "description": "The API for the golang test project",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/GRETOR0231/tinder_matching/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "Tinder"
+        ],
+        "operationId": "Broker",
+        "responses": {
+          "200": {
+            "description": "Hit the broker"
+          }
+        }
+      }
+    },
+    "/Add": {
+      "post": {
+        "tags": [
+          "Tinder"
+        ],
+        "operationId": "Add",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Add"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Add a person to the list"
+          }
+        }
+      }
+    },
+    "/Remove": {
+      "post": {
+        "tags": [
+          "Tinder"
+        ],
+        "operationId": "Remove",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Remove"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Remove a person to the list"
+          }
+        }
+      }
+    },
+    "/Query": {
+      "post": {
+        "tags": [
+          "Tinder"
+        ],
+        "operationId": "Query",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query a person to the list"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Add": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gender": {
+            "type": "boolean"
+          },
+          "wanteddatesnumber": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Remove": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Query": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
