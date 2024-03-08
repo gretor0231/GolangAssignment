@@ -23,3 +23,12 @@ sudo make up_build
 
 2.stop the docker image
 sudo make down
+
+
+
+time complexity of APIs:
+1.AddSinglePersonAndMatch: O(n)
+
+2.RemoveSinglePerson: O(n)
+
+3.QuerySinglePeople:O(n)
