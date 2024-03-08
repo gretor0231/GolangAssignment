@@ -1,6 +1,7 @@
 package main
 
 import (
+	"broker/cmd/functions"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,7 +9,9 @@ import (
 
 const webPort = "80"
 
-type Config struct{}
+type Config struct {
+	People []functions.Person
+}
 
 func main() {
 	app := Config{}
