@@ -15,3 +15,11 @@ request parameter.
 Structured project layout:
 
 ![Screenshot from 2024-03-08 09-36-05.png](photos%2FScreenshot%20from%202024-03-08%2009-36-05.png)
+
+
+how to use:
+1.start build docker image in local machine
+sudo make up_build
+
+2.stop the docker image
+sudo make down
