@@ -13,4 +13,5 @@ cannot be matched anymore.
 request parameter.
 
 Structured project layout:
-   ![](/home/ericho/Pictures/Screenshots/Screenshot from 2024-03-08 09-36-05.png)
+
+![Screenshot from 2024-03-08 09-36-05.png](photos%2FScreenshot%20from%202024-03-08%2009-36-05.png)
