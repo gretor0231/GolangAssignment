@@ -18,15 +18,19 @@ Structured project layout:
 
 
 how to use:
+
 1.start build docker image in local machine
+
 sudo make up_build
 
 2.stop the docker image
+
 sudo make down
 
 
 
 time complexity of APIs:
+\
 1.AddSinglePersonAndMatch: O(n)
 
 2.RemoveSinglePerson: O(n)
