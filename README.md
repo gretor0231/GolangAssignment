@@ -22,11 +22,13 @@ how to use:
 1.start build docker image in local machine
 
 sudo make up_build
+sudo make start
+
 
 2.stop the docker image
 
 sudo make down
-
+sudo make stop
 
 
 time complexity of APIs:
